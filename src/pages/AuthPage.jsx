@@ -105,7 +105,8 @@ export default function AuthPage() {
         return;
       }
 
-      const registerPayload = { email: otpTarget, password, fullName };
+      const registerPayload = { email: otpTarget, password, fullName, otpCode: code };
+
       const regRes = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -151,37 +152,39 @@ export default function AuthPage() {
 
 
   return (
-    <div className="shadow-[0_0_50px_#0ef] overflow-hidden rounded-[50px] w-[600px] h-[800px] bg-[#242424] animate-[hue_8s_linear_infinite] relative">
-      {/* LOGIN panel */}
-      <div className={[
-        "absolute inset-0 transition-transform transition-opacity duration-1000 ease-out",
-        "will-change-[transform] pointer-events-auto",
-        isLogin ? "translate-y-0 z-10" : "-translate-y-full -z-10 pointer-events-none",
-      ].join(" ")}>
-        <Login onSwitch={() => setMode("register")} LoginBtn={handleLogin} />
-      </div>
-
-      {/* REGISTER panel */}
-      <div className={[
-        "absolute inset-0 transition-transform transition-opacity duration-1000 ease-out",
-        "will-change-[transform] pointer-events-auto",
-        isRegister ? "translate-y-0 z-10" : "translate-y-full -z-10 pointer-events-none",
-      ].join(" ")}>
-        <Register onSwitch={() => setMode("login")} createAccountBtn={handleCreateBtn} />
-      </div>
-
-      {/* OTP panel */}
-      {mode === "otp" && (
-        <div className="absolute inset-0 z-20">
-          <OtpVerification
-            targetLabel="email"
-            targetValue={otpTarget}
-            onVerify={verifyOtp}
-            onResend={resendOtp}
-            onBack={() => setMode("register")}
-          />
+    <div className="container flex justify-center items-center">
+      <div className="shadow-[0_0_50px_#0ef] overflow-hidden rounded-[50px] w-[600px] h-[800px] bg-[#242424] animate-[hue_8s_linear_infinite] relative">
+        {/* LOGIN panel */}
+        <div className={[
+          "absolute inset-0 transition-transform transition-opacity duration-1000 ease-out",
+          "will-change-[transform] pointer-events-auto",
+          isLogin ? "translate-y-0 z-10" : "-translate-y-full -z-10 pointer-events-none",
+        ].join(" ")}>
+          <Login onSwitch={() => setMode("register")} LoginBtn={handleLogin} />
         </div>
-      )}
+
+        {/* REGISTER panel */}
+        <div className={[
+          "absolute inset-0 transition-transform transition-opacity duration-1000 ease-out",
+          "will-change-[transform] pointer-events-auto",
+          isRegister ? "translate-y-0 z-10" : "translate-y-full -z-10 pointer-events-none",
+        ].join(" ")}>
+          <Register onSwitch={() => setMode("login")} createAccountBtn={handleCreateBtn} />
+        </div>
+
+        {/* OTP panel */}
+        {mode === "otp" && (
+          <div className="absolute inset-0 z-20">
+            <OtpVerification
+              targetLabel="email"
+              targetValue={otpTarget}
+              onVerify={verifyOtp}
+              onResend={resendOtp}
+              onBack={() => setMode("register")}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

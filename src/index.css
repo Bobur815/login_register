@@ -20,6 +20,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.container{
+  @apply mx-auto w-full max-w-[1350px] max-md:px-6
+}
 .button-group{
   @apply text-3xl transition font-bold rounded-3xl text-white shadow-[5px_5px_35px_15px_rgba(59,_130,_246,_0.5)] py-5 px-10 cursor-pointer hover:bg-[rgba(59,_130,_246,_0.5)] w-full
 }
@@ -41,7 +44,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  @apply flex justify-center items-center min-h-screen overflow-hidden bg-black;
+  @apply min-h-screen bg-black; 
 }
 
 .input-group {
