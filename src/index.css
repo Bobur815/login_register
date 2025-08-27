@@ -1,41 +1,63 @@
 @import "tailwindcss";
+
+
+@keyframes hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.button-group{
+  @apply text-3xl transition font-bold rounded-3xl text-white shadow-[5px_5px_35px_15px_rgba(59,_130,_246,_0.5)] py-5 px-10 cursor-pointer hover:bg-[rgba(59,_130,_246,_0.5)] w-full
+}
+
+.button-group:active{
+  @apply scale-95 
+}
+
+.input-field {
+  @apply w-full border border-transparent rounded px-2 py-2;
+}
+
+.input-field-error {
+  @apply border-red-500;
+}
+
+
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+  @apply flex justify-center items-center min-h-screen overflow-hidden bg-black;
 }
 
-.input-group{
-  @apply relative my-[30px] border-b border-white w-full
+.input-group {
+  @apply relative my-[30px] w-full border-b border-white;
 }
 
-.input-group label{
-  @apply absolute top-[50%] left-[5px] transition-[0.5s] translate-y-[-50%] text-[22px] pointer-events-none text-white
+.input-group label {
+  @apply absolute left-[5px] top-1/2 -translate-y-1/2 text-[22px] text-white pointer-events-none transition duration-300 ease-in-out;
 }
 
-.input-group input{
-  @apply w-full text-[22px] h-[50px] text-white px-[5px] bg-transparent outline-0
+.input-group input {
+  @apply w-full h-[50px] text-[22px] text-white px-[5px] bg-transparent outline-0;
 }
 
-.input-group input:focus ~ label,
-.input-group input:valid ~ label{
-  @apply top-[-5px]
+/* float on focus OR when not empty */
+.input-group input:focus+label,
+.input-group input:not(:placeholder-shown)+label {
+  @apply -translate-y-14;
 }
