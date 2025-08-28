@@ -54,7 +54,7 @@ export default function Courses() {
         ))}
       </Stack>
       <CourseCards />
-      <Button sx={{borderRadius:6, paddingX:4, color:'white', paddingY:1, bgcolor:'darkblue'}} variant="contained">Ko'proq ko'rish</Button>
+      <Button sx={{borderRadius:6, paddingX:4, color:'white', paddingY:1, bgcolor:'darkblue', fontWeight:900}} variant="contained">Ko'proq ko'rish</Button>
     </div>
   );
 }

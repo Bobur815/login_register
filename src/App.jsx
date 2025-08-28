@@ -8,8 +8,6 @@ import Contact from "./pages/Contact";
 import AuthPage from "./pages/AuthPage";
 
 function App() {
-  getComputedStyle(document.documentElement)
-  .getPropertyValue('--mui-palette-background-paper')
   return (
     <BrowserRouter>
       <Navbar />
