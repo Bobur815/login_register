@@ -1,29 +1,57 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Button, Stack } from "@mui/material";
-import logoSite from "../../public/logo-dark (1).svg";
+import { Button, Stack, IconButton, Box } from "@mui/material";
+import { useColorScheme } from "@mui/material/styles";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import logoSite from "/logo-dark (1).svg";
+import darkLogo from '/logo.svg'
 
 const links = [
-    { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
-    { to: "/services", label: "Services" },
-    { to: "/contact", label: "Contact" },
+    { to: "/", label: "Asosiy" },
+    { to: "/about", label: "Biz haqimizda" },
+    { to: "/services", label: "Kurslar" },
+    { to: "/contact", label: "Bog'lanish" },
 ];
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+    const { mode, setMode } = useColorScheme();
 
-    const baseLink = "px-3 py-2 text-md font-medium transition";
-    const active = "text-blue-600 border-b border-blue-600";
-    const inactive = "text-black hover:text-blue-600";
+    if (!mode) {
+        return null;
+    }
+
+    const baseLink =
+        "px-3 py-2 text-md font-medium transition-colors !text-[--mui-palette-text-primary]";
+    const active =
+        "!text-blue-500 border-b border-[--mui-palette-primary-main]";
+    const inactive =
+        "hover:!text-blue-500 dark:!text-[--mui-palette-primary-main]";
+
+
+    const toggleMode = () => setMode(mode === "dark" ? "light" : "dark");
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-black/10">
+        <Box component="header"
+            sx={{
+                position: "sticky",
+                top: 0,
+                zIndex: (t) => t.zIndex.appBar,
+                bgcolor: "background.paper",
+                color: "text.primary",
+                borderBottom: 1,
+                borderColor: "divider",
+                backdropFilter: "blur(8px)",
+                width: "100%",
+            }}>
             <nav className="container ">
                 <div className="flex h-16 items-center justify-between">
                     {/* Brand */}
                     <Link to="/" className="shrink-0">
-                        <img src={logoSite} alt="logo" className="h-8 w-auto" />
+                        {mode === 'light' ? <img src={logoSite} alt="logo" className="h-8 w-auto" /> :
+                            <img src={darkLogo} alt="logo" className="h-8 w-auto" />
+                        }
                     </Link>
 
                     {/* Desktop nav */}
@@ -43,23 +71,13 @@ export default function Navbar() {
                         ))}
                     </ul>
 
-                    {/* Desktop actions (visible ≥ md) */}
+                    {/* Desktop actions */}
                     <div className="hidden md:flex items-center gap-3">
-                        <Button
-                            variant="text"
-                            sx={{ color: "text.primary" }}
-                            component={Link}
-                            to="/auth"
-                        >
-                            Log in
-                        </Button>
-                        <Button
-                            variant="contained"
-                            sx={{ bgcolor: "primary.main", ":hover": { bgcolor: "primary.dark" } }}
-                            component={Link}
-                            to="/auth"
-                        >
-                            Register
+                        <IconButton onClick={toggleMode} color="inherit" aria-label="Toggle dark mode">
+                            {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+                        </IconButton>
+                        <Button variant="contained" component={Link} to="/auth">
+                            Kirish
                         </Button>
                     </div>
 
@@ -100,29 +118,17 @@ export default function Navbar() {
                             ))}
                         </ul>
                         <Stack spacing={1.5} direction="row">
-                            <Button
-                                fullWidth
-                                variant="outlined"
-                                component={Link}
-                                to="/auth"
-                                onClick={() => setOpen(false)}
-                            >
-                                Log in
-                            </Button>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                sx={{ bgcolor: "primary.main", ":hover": { bgcolor: "primary.dark" } }}
-                                component={Link}
-                                to="/auth"
-                                onClick={() => setOpen(false)}
-                            >
-                                Register
+                            <IconButton onClick={toggleMode} color="inherit" aria-label="Toggle dark mode" sx={{ mr: 1 }}>
+                                {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+                            </IconButton>
+                            <Button fullWidth variant="contained" component={Link} to="/auth" onClick={() => setOpen(false)}>
+                                Kirish
                             </Button>
                         </Stack>
                     </div>
                 )}
             </nav>
-        </header>
+        </Box>
     );
 }
+
