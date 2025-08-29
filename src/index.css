@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @keyframes hue {
   0% {
     filter: hue-rotate(0deg);
@@ -9,6 +8,14 @@
   100% {
     filter: hue-rotate(360deg);
   }
+}
+
+.galleryItem{
+  @apply lg:col-span-4 h-56 sm:h-64
+}
+
+.galleryItem2{
+  @apply lg:col-span-6 h-72 sm:h-80
 }
 
 :root {
@@ -45,6 +52,14 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.logoIMG{
+  @apply bg-white rounded-full p-0.5 w-6 h-6 hover:scale-110 transition-transform
+}
+
+/* Hide horizontal scrollbar – optional */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
 .input-group {
   @apply relative my-[30px] w-full border-b border-white;

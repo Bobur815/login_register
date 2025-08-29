@@ -4,7 +4,7 @@ import { ModeButton } from "../components/ModeButton";
 import CourseCards from "../components/CourseCards";
 import { Button } from "@mui/material";
 
-export default function Courses() {
+export default function Courses({ page }) {
   const tags = [
     "Barcha kurslar",
     "Backend",
@@ -15,19 +15,21 @@ export default function Courses() {
     "Buxgalteriya",
   ];
 
-  async function getCourses(filter={}) {
+  async function getCourses(filter = {}) {
     const res = await fetch(`/api/course?${filter}`)
     const courses = res.json()
     console.log(courses);
-    
+
 
   }
-  getCourses()
   const [activeTag, setActiveTag] = React.useState(tags[0]);
-
-  return (
+  const subtitle = page === 'home'
+    ? <h1 className="text-5xl font-bold">Ommabop kurslar</h1>
+    : <h1 className="text-5xl font-bold self-start">Kurslar</h1>
+  
+    return (
     <div className="container flex flex-col justify-center items-center gap-6 mt-6">
-      <h1 className="text-5xl font-bold">Ommabop kurslar</h1>
+      {subtitle}
       <p className="text-center text-gray-400 text-[18px] font-bold">
         Kasbga yo&apos;naltirilgan amaliy mashg&apos;ulotlar yordamida tez va
         samarali ravishda mutaxassislar safiga qo&apos;shiling. Har bir
@@ -54,7 +56,7 @@ export default function Courses() {
         ))}
       </Stack>
       <CourseCards />
-      <Button sx={{borderRadius:6, paddingX:4, color:'white', paddingY:1, bgcolor:'darkblue', fontWeight:900}} variant="contained">Ko'proq ko'rish</Button>
+      <Button sx={{ borderRadius: 6, paddingX: 4, color: 'white', paddingY: 1, bgcolor: 'darkblue', fontWeight: 900 }} variant="contained">Ko'proq ko'rish</Button>
     </div>
   );
 }

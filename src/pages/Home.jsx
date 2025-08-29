@@ -3,6 +3,9 @@ import homePic from '/home.png'
 import Button from '@mui/material/Button';
 import Courses from './Courses';
 import IstalganNuqta from '../components/IstalganNuqta';
+import Mentors from '../components/Mentors';
+import Comments from '../components/Comments';
+import Footer from '../components/Footer';
 
 
 function Home() {
@@ -16,10 +19,10 @@ function Home() {
         </div>
         <img src={homePic} alt="" />
       </div>
-      <Courses />
+      <Courses page={'home'}/>
 
       {/* Bizga qo'shiling*/}
-      <section className='container flex flex-col gap-6'>
+      <section className='container flex flex-col gap-6 mt-12'>
         <h1 className='text-5xl font-bold '>Bizga qo'shiling</h1>
         <p className='text-[18px]'>Bizning safimizga nafaqat o’rganuvchi balki yetarlicha tajribangiz bo’lsa mentor sifatida ham qo’shilishingiz mumkin.</p>
         <div className='container flex justify-between px-6'>
@@ -38,6 +41,9 @@ function Home() {
 
       {/*Istalgan nuqta */}
       <IstalganNuqta />
+      <Mentors />
+      <Comments />
+      <Footer />
     </div>
   )
 }
